@@ -102,7 +102,19 @@ affinity: {}
 extraVolumes: []
 extraVolumeMounts: []
 extraInitContainers: []
-extraEnv: []
+extraEnv:
+  - name: RELAYHOST
+    value: smtp.protonmail.ch:587
+  - name: RELAYHOST_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: postfix-relayhost
+        key: username
+  - name: RELAYHOST_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: postfix-relayhost
+        key: password
 extraContainers: []
 
 deployment:
@@ -163,16 +175,8 @@ config:
     # LOG_FORMAT:
     RELAYHOST: smtp.protonmail.ch:587 
     # SASL_RELAYHOST: # when specified overwrites the RELAYHOST in the sasl_passwd file
-    RELAYHOST_USERNAME:
-      valueFrom: # Use this to set a username from a secret
-        secretKeyRef:
-          name: postfix-relayhost-username
-          key: username
-    RELAYHOST_PASSWORD:
-      valueFrom: # Use this to set a password from a secret
-        secretKeyRef:
-          name: postfix-relayhost-password
-          key: password
+    RELAYHOST_USERNAME: ${RELAYHOST_USERNAME}
+    RELAYHOST_PASSWORD: ${RELAYHOST_PASSWORD}
     # MASQUERADED_DOMAINS:
     # SMTP_HEADER_CHECKS:
     # DKIM_SELECTOR:
