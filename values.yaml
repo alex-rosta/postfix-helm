@@ -170,7 +170,7 @@ config:
     # TZ:
     # FORCE_COLOR:
     # INBOUND_DEBUGGING:
-    # ALLOWED_SENDER_DOMAINS:
+    ALLOWED_SENDER_DOMAINS: rosta.dev
     # ALLOW_EMPTY_SENDER_DOMAINS:
     # LOG_FORMAT:
     RELAYHOST: smtp.protonmail.ch:587 
