@@ -250,10 +250,4 @@ startupProbe:
         ps axf | fgrep -v grep | fgrep -q 'opendkim'
 
 lifecycle:
-  postStart:
-    exec:
-      command:
-        - sh
-        - -c
-        - |
-          echo -e "To: alex@rosta.dev\nSubject: Postfix started\n\nThe Postfix container has started successfully." | sendmail -t
+  postStart: {}
